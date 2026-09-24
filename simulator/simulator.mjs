@@ -41,7 +41,6 @@ async function sendHeartbeat(device) {
     await request(`/api/devices/${device.id}/heartbeat`, {
       method: "POST",
       body: JSON.stringify({
-        timestamp: new Date().toISOString(),
         status: "OK",
       }),
     });
