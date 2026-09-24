@@ -123,7 +123,7 @@ npm --version
 Clone the repository:
 
 ```bash
-git clone <YOUR_REPOSITORY_URL>
+git clone https://github.com/synakr/device-fleet-monitor.git
 cd device-fleet-monitor
 ```
 
@@ -641,44 +641,23 @@ Heartbeat freshness depends on when the server received the heartbeat. Using ser
 
 ---
 
-# AI Usage
+## AI Usage
 
-AI tools were used during development as an engineering assistant.
+ChatGPT was used as a development assistant during the project.
 
-### Tools used
+### Used for
 
-- **ChatGPT**
+- Discussing and validating the overall project structure.
+- Reviewing API design and edge cases.
+- Getting suggestions for automated test cases.
+- Helping debug implementation issues and dependency setup.
+- Reviewing the 30-second heartbeat timeout logic.
 
-### How AI was used
+### Developer's Work
 
-AI assistance was used for:
+The core implementation, project structure, API routes, simulator, testing, and final integration were developed and verified by me. AI suggestions were reviewed and adapted rather than copied directly.
 
-- Discussing the overall project architecture.
-- Choosing a lightweight implementation appropriate for the three-hour constraint.
-- Reviewing API design and validation.
-- Explaining the 30-second heartbeat timeout logic.
-- Helping structure the automated tests.
-- Reviewing implementation decisions and debugging issues.
-
-### Example of an AI-generated suggestion that was changed/improved
-
-An initial heartbeat implementation accepted the device-provided `timestamp` and used it to determine heartbeat freshness.
-
-This was changed so that the server records the heartbeat receipt time instead.
-
-The final implementation uses:
-
-```text
-server receipt time
-        ↓
-latest heartbeat timestamp
-        ↓
-current time - heartbeat time
-        ↓
-ONLINE / OFFLINE
-```
-
-This avoids relying on synchronized clocks between simulated devices and the server and makes the timeout behavior deterministic.
+One example was the heartbeat timestamp handling. An initial approach relied on the timestamp supplied by the device. I changed this to use the server's heartbeat receipt time so that device clock differences would not affect the 30-second timeout calculation.
 
 ### Personal verification
 
